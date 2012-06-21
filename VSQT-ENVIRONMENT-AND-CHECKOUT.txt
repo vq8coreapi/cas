@@ -1,0 +1,26 @@
+If you are working on Mac/Linux you probably know how to use git, so go to step 3.
+
+1). Download latest git client from:
+http://code.google.com/p/msysgit/downloads/list
+
+2). This step is very important, you will have lots of issues with merging if skipped.
+In ${user.home} create file ".gitconfig" and add the following content (between ====================)
+====================
+[core]
+	autocrlf = true
+====================
+It should be enough, however if still have issues please read following documentation:
+https://help.github.com/articles/dealing-with-line-endings
+
+
+3). Make sure you have GitHub account and you are added as collaborator.
+
+4). Clone repo and add upstream: https://help.github.com/articles/fork-a-repo
+Step 2 and Step 3
+Valid upstream project: https://github.com/Jasig/cas, you can find url for upstream on it's page
+
+
+=====================================
+To deploy maven project to artifactory please use mvn deploy
+To change CAS version before deploy please use global replace on "pom.xml" file mask:
+<version>3.4.6-vq8coreapi-1.0.0</version> -> 	<version>3.4.6-vq8coreapi-1.0.1</version>

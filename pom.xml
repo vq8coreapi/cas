@@ -10,7 +10,7 @@
 	<packaging>pom</packaging>
 	<name>Jasig Central Authentication Service</name>
     <description>Parent POM for Jasig CAS Project</description>
-	<version>3.4.6</version>
+	<version>3.4.6-vq8coreapi-1.0.0</version>
 	<url>http://www.jasig.org/cas/</url>
 	<inceptionYear>2004</inceptionYear>
 
@@ -22,11 +22,21 @@
 		</license>
 	</licenses>
 
+    <distributionManagement>
+        <repository>
+            <id>visiquate</id>
+            <name>VisiQuate Common Maven Repository</name>
+            <url>http://evualvisd0145:8081/artifactory/repo/</url>
+        </repository>
+    </distributionManagement>
+
+    <!--
     <scm>
         <connection>scm:svn:https://source.jasig.org/cas3/tags/cas-server-3.4.6</connection>
         <developerConnection>scm:svn:https://source.jasig.org/cas3/tags/cas-server-3.4.6</developerConnection>
         <url>https://source.jasig.org/cas3/tags/cas-server-3.4.6</url>
     </scm>
+    -->
     
 	<build>
 		<testResources>
@@ -159,6 +169,37 @@ pTSqrOnmqmUUnopqmvummmmmmUUnopqmvummmmmmUUA1jJ
                 </configuration>
             </plugin>
 		</plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.1.2</version>
+                    <configuration>
+                        <archive>
+                            <index>true</index>
+                            <manifest>
+                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            </manifest>
+                            <manifestSections>
+                                <manifestSection>
+                                    <name>Build-Information</name>
+                                    <manifestEntries>
+                                        <Java-Version>${java.version}</Java-Version>
+                                        <Java-Vendor>${java.vendor}</Java-Vendor>
+                                        <Os-Name>${os.name}</Os-Name>
+                                        <Os-Arch>${os.arch}</Os-Arch>
+                                        <Os-Version>${os.version}</Os-Version>
+                                    </manifestEntries>
+                                </manifestSection>
+                            </manifestSections>
+                        </archive>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 	</build>
 
 	<dependencies>
@@ -194,6 +235,13 @@ pTSqrOnmqmUUnopqmvummmmmmUUnopqmvummmmmmUUA1jJ
             <artifactId>aspectjweaver</artifactId>
             <scope>compile</scope>
             <version>${aspectj.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+            <version>${aspectj.version}</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -316,14 +364,6 @@ pTSqrOnmqmUUnopqmvummmmmmUUnopqmvummmmmmUUA1jJ
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-entitymanager</artifactId>
                 <version>${hibernate.core.version}</version>
-                <type>jar</type>
-            </dependency>
-
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-annotations</artifactId>
-                <version>${hibernate.core.version}</version>
-                <scope>compile</scope>
                 <type>jar</type>
             </dependency>
 
@@ -503,6 +543,12 @@ pTSqrOnmqmUUnopqmvummmmmmUUnopqmvummmmmmUUA1jJ
 
             <dependency>
                 <groupId>org.aspectj</groupId>
+                <artifactId>aspectjtools</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
                 <version>${aspectj.version}</version>
             </dependency>
@@ -593,4 +639,30 @@ pTSqrOnmqmUUnopqmvummmmmmUUnopqmvummmmmmUUA1jJ
         <inspektr.version>1.0.2.GA</inspektr.version>
         <commons.io.version>2.0</commons.io.version>
 	</properties>
+
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>
