@@ -20,7 +20,20 @@ Step 2 and Step 3
 Valid upstream project: https://github.com/Jasig/cas, you can find url for upstream on it's page
 
 
+
 =====================================
-To deploy maven project to artifactory please use mvn deploy
-To change CAS version before deploy please use global replace on "pom.xml" file mask:
-<version>3.4.6-vq8coreapi-1.0.0</version> -> 	<version>3.4.6-vq8coreapi-1.0.1</version>
+To deploy maven project to artifactory please there are 3 simple steps:
+
+1). Configure repository settings in ${user.home}/.m2/settings.xml
+        <server>
+            <id>visiquate-local-repository</id>
+            <username>contact-vq8-core-api-team-lead-for-username</username>
+            <password>contact-vq8-core-api-team-lead-for-password</password>
+        </server>
+
+2). Change version in cas files (can be done using global replace on pom.xml):
+<version>3.4.6-vq8coreapi-1.0.0</version> -> <version>3.4.6-vq8coreapi-1.0.1</version>
+
+3). run "mvn deploy", if everything ok your fresh build should be available in vq8 local maven repo
+
+4). Optionally, create git tag, please contact vq8-core-api-team-lead for support
