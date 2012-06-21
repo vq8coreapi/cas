@@ -10,7 +10,7 @@
 	<packaging>pom</packaging>
 	<name>Jasig Central Authentication Service</name>
     <description>Parent POM for Jasig CAS Project</description>
-	<version>3.4.6-vq8coreapi-1.0.0</version>
+	<version>3.4.6-vq8coreapi-0.0.1</version>
 	<url>http://www.jasig.org/cas/</url>
 	<inceptionYear>2004</inceptionYear>
 
@@ -24,9 +24,9 @@
 
     <distributionManagement>
         <repository>
-            <id>visiquate</id>
-            <name>VisiQuate Common Maven Repository</name>
-            <url>http://evualvisd0145:8081/artifactory/repo/</url>
+            <id>visiquate-local-repository</id>
+            <name>EVUALVISD0145-releases</name>
+            <url>http://evualvisd0145:8081/artifactory/ext-release-local</url>
         </repository>
     </distributionManagement>
 
