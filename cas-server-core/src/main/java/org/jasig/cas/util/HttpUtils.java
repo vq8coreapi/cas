@@ -6,11 +6,11 @@ public class HttpUtils {
 
 	private static ThreadLocal<CasHttpMessage> casHttpMessage = new ThreadLocal<CasHttpMessage>();
 
-	public static ThreadLocal<CasHttpMessage> getCasHttpMessage() {
-		return casHttpMessage;
+	public static CasHttpMessage getCasHttpMessage() {
+		return casHttpMessage.get();
 	}
 
-	public static void setCasHttpMessage(ThreadLocal<CasHttpMessage> casHttpMessage) {
-		HttpUtils.casHttpMessage = casHttpMessage;
+	public static void setCasHttpMessage(CasHttpMessage casHttpMessage) {
+		HttpUtils.casHttpMessage.set(casHttpMessage);
 	}
 }

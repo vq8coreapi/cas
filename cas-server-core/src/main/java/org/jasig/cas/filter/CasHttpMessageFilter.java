@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jasig.cas.model.CasHttpMessage;
 import org.jasig.cas.util.HttpUtils;
 
 public class CasHttpMessageFilter implements Filter {
@@ -23,10 +24,12 @@ public class CasHttpMessageFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		HttpUtils.getCasHttpMessage().get()
-				.setRequest((HttpServletRequest) request);
-		HttpUtils.getCasHttpMessage().get()
-				.setResponse((HttpServletResponse) response);
+		CasHttpMessage casHttpMessage = new CasHttpMessage();
+		casHttpMessage.setRequest((HttpServletRequest) request);
+		casHttpMessage.setResponse((HttpServletResponse) response);
+		HttpUtils.setCasHttpMessage(casHttpMessage);
+		
+		chain.doFilter(request, response);
 	}
 
 }
