@@ -31,6 +31,7 @@ import javax.persistence.Table;
 
 import org.jasig.cas.authentication.Authentication;
 import org.jasig.cas.authentication.principal.Service;
+import org.jasig.cas.util.HttpUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
@@ -69,6 +70,10 @@ public final class TicketGrantingTicketImpl extends AbstractTicket implements
     @Column(name="SERVICES_GRANTED_ACCESS_TO", nullable=false)
     private final HashMap<String,Service> services = new HashMap<String, Service>();
     
+    // parameter for creating correct logout url
+    @Column(name="SERVER_NAME")
+    private String serverName;
+    
     public TicketGrantingTicketImpl() {
         // nothing to do
     }
@@ -86,6 +91,8 @@ public final class TicketGrantingTicketImpl extends AbstractTicket implements
         final TicketGrantingTicketImpl ticketGrantingTicket,
         final Authentication authentication, final ExpirationPolicy policy) {
         super(id, ticketGrantingTicket, policy);
+        // here we add new parameter serverName
+        setServerName(HttpUtils.getCasHttpMessage().get().getRequest().getServerName());
 
         Assert.notNull(authentication, "authentication cannot be null");
 
@@ -147,6 +154,14 @@ public final class TicketGrantingTicketImpl extends AbstractTicket implements
     public boolean isExpiredInternal() {
         return this.expired;
     }
+    
+	public String getServerName() {
+		return serverName;
+	}
+
+	public void setServerName(String serverName) {
+		this.serverName = serverName;
+	}
 
     public List<Authentication> getChainedAuthentications() {
         final List<Authentication> list = new ArrayList<Authentication>();
@@ -172,4 +187,5 @@ public final class TicketGrantingTicketImpl extends AbstractTicket implements
         
         return ticket.getId().equals(this.getId());
     }
+
 }
