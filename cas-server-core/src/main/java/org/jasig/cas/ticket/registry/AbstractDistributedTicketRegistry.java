@@ -148,6 +148,11 @@ public abstract class AbstractDistributedTicketRegistry extends AbstractTicketRe
             updateTicket();
             return t;
         }
+
+
+		public String getServerName() {
+			return getTicket().getServerName();
+		}
     }
 
     private static final class TicketGrantingTicketDelegator extends TicketDelegator<TicketGrantingTicket> implements TicketGrantingTicket {

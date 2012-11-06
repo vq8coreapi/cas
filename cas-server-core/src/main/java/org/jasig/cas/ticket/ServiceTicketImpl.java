@@ -25,6 +25,7 @@ import javax.persistence.Table;
 
 import org.jasig.cas.authentication.Authentication;
 import org.jasig.cas.authentication.principal.Service;
+import org.jasig.cas.util.HttpUtils;
 import org.springframework.util.Assert;
 
 /**
@@ -57,6 +58,10 @@ public final class ServiceTicketImpl extends AbstractTicket implements
     @Column(name="TICKET_ALREADY_GRANTED",nullable=false)
     private Boolean grantedTicketAlready = false;
     
+    // parameter for creating correct logout url
+    @Column(name="SERVER_NAME")
+    private String serverName;
+    
     public ServiceTicketImpl() {
         // exists for JPA purposes
     }
@@ -78,6 +83,9 @@ public final class ServiceTicketImpl extends AbstractTicket implements
         final TicketGrantingTicketImpl ticket, final Service service,
         final boolean fromNewLogin, final ExpirationPolicy policy) {
         super(id, ticket, policy);
+        
+        // here we add new parameter serverName
+        setServerName(HttpUtils.getCasHttpMessage().getRequest().getServerName());
 
         Assert.notNull(ticket, "ticket cannot be null");
         Assert.notNull(service, "service cannot be null");
@@ -128,4 +136,12 @@ public final class ServiceTicketImpl extends AbstractTicket implements
         
         return serviceTicket.getId().equals(this.getId());
     }
+    
+	public String getServerName() {
+		return serverName;
+	}
+
+	public void setServerName(String serverName) {
+		this.serverName = serverName;
+	}
 }

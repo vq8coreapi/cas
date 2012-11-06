@@ -62,4 +62,10 @@ public interface ServiceTicket extends Ticket {
      */
     TicketGrantingTicket grantTicketGrantingTicket(String id,
         Authentication authentication, ExpirationPolicy expirationPolicy);
+    
+    /**
+     * Returns server name for which ST was created.
+     * @return
+     */
+    String getServerName();
 }

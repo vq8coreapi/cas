@@ -403,6 +403,8 @@ public final class CentralAuthenticationServiceImpl implements CentralAuthentica
             for (int i = 0; i < chainedAuthenticationsList.size() - 1; i++) {
                 authentications.add(serviceTicket.getGrantingTicket().getChainedAuthentications().get(i));
             }
+            
+            authToUse.getAttributes().put("ServerName", serviceTicket.getServerName());
             authentications.add(authToUse);
 
             return new ImmutableAssertionImpl(authentications, serviceTicket.getService(), serviceTicket.isFromNewLogin());
