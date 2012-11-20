@@ -84,9 +84,10 @@ public final class ServiceTicketImpl extends AbstractTicket implements
         final boolean fromNewLogin, final ExpirationPolicy policy) {
         super(id, ticket, policy);
         
-        // here we add new parameter serverName
-        setServerName(HttpUtils.getCasHttpMessage().getRequest().getServerName());
-
+        // here we create a new parameter serverUrl and add it to ST
+        String requestUri = HttpUtils.getCasHttpMessage().getRequest().getRequestURI();
+        String requestUrl = HttpUtils.getCasHttpMessage().getRequest().getRequestURL().toString();        	
+        setServerName( requestUrl.substring(0, requestUrl.length() - requestUri.length()) );       
         Assert.notNull(ticket, "ticket cannot be null");
         Assert.notNull(service, "service cannot be null");
 
