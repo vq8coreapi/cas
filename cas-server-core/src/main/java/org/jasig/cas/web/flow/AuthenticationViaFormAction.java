@@ -61,11 +61,12 @@ public class AuthenticationViaFormAction {
     public final String submit(final RequestContext context, final Credentials credentials, final MessageContext messageContext) throws Exception {
         final String ticketGrantingTicketId = WebUtils.getTicketGrantingTicketId(context);
         final Service service = WebUtils.getService(context);
+        final Boolean fakeLogin = WebUtils.getFakeLogin(context);
 
         if (StringUtils.hasText(context.getRequestParameters().get("renew")) && ticketGrantingTicketId != null && service != null) {
 
             try {
-                final String serviceTicketId = this.centralAuthenticationService.grantServiceTicket(ticketGrantingTicketId, service, credentials);
+                final String serviceTicketId = this.centralAuthenticationService.grantServiceTicket(ticketGrantingTicketId, service, credentials, fakeLogin);
                 WebUtils.putServiceTicketInRequestScope(context, serviceTicketId);
                 putWarnCookieIfRequestParameterPresent(context);
                 return "warn";

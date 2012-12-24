@@ -84,6 +84,15 @@ public final class WebUtils {
         return tgtFromRequest != null ? tgtFromRequest : tgtFromFlow;
 
     }
+    
+    public static Boolean getFakeLogin(final RequestContext context) {
+    	Object fakeLogin = context.getFlowScope().get("fakeLogin");
+    	if (fakeLogin instanceof Boolean){
+    		return (Boolean) fakeLogin;
+    	} else{
+    		return Boolean.parseBoolean((String) fakeLogin);
+    	}
+    }
 
     public static void putServiceTicketInRequestScope(
         final RequestContext context, final String ticketValue) {
