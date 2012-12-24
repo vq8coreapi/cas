@@ -74,10 +74,10 @@ public final class RemoteCentralAuthenticationService implements CentralAuthenti
     /**
      * @throws IllegalArgumentException if given invalid credentials
      */
-    public String grantServiceTicket(final String ticketGrantingTicketId, final Service service, final Credentials credentials) throws TicketException {
+    public String grantServiceTicket(final String ticketGrantingTicketId, final Service service, final Credentials credentials, final Boolean fakeLogin) throws TicketException {
         checkForErrors(credentials);
 
-        return this.centralAuthenticationService.grantServiceTicket(ticketGrantingTicketId, service, credentials);
+        return this.centralAuthenticationService.grantServiceTicket(ticketGrantingTicketId, service, credentials, fakeLogin);
     }
 
     public Assertion validateServiceTicket(final String serviceTicketId, final Service service) throws TicketException {

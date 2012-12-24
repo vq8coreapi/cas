@@ -50,7 +50,7 @@ public final class GenerateServiceTicketAction extends AbstractAction {
         try {
             final String serviceTicketId = this.centralAuthenticationService
                 .grantServiceTicket(ticketGrantingTicket,
-                    service);
+                    service, null, WebUtils.getFakeLogin(context));
             WebUtils.putServiceTicketInRequestScope(context,
                 serviceTicketId);
             return success();

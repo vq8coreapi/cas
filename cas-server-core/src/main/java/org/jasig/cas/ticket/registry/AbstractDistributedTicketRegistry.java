@@ -149,9 +149,12 @@ public abstract class AbstractDistributedTicketRegistry extends AbstractTicketRe
             return t;
         }
 
-
 		public String getServerName() {
 			return getTicket().getServerName();
+		}
+
+		public Boolean getFakeLogin() {
+			return getTicket().getFakeLogin();
 		}
     }
 
@@ -167,8 +170,8 @@ public abstract class AbstractDistributedTicketRegistry extends AbstractTicketRe
             return getTicket().getAuthentication();
         }
 
-        public ServiceTicket grantServiceTicket(final String id, final Service service, final ExpirationPolicy expirationPolicy, final boolean credentialsProvided) {
-            final ServiceTicket t = this.getTicket().grantServiceTicket(id, service, expirationPolicy, credentialsProvided);
+        public ServiceTicket grantServiceTicket(final String id, final Service service, final ExpirationPolicy expirationPolicy, final boolean credentialsProvided, Boolean fakeLogin) {
+            final ServiceTicket t = this.getTicket().grantServiceTicket(id, service, expirationPolicy, credentialsProvided, fakeLogin);
             updateTicket();
             return t;
         }

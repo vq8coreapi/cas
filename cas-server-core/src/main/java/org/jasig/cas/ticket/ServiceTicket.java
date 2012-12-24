@@ -68,4 +68,10 @@ public interface ServiceTicket extends Ticket {
      * @return
      */
     String getServerName();
+    
+    /**
+     * Returns fake login status of ST.
+     * @return
+     */
+    Boolean getFakeLogin();
 }

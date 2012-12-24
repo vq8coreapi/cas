@@ -178,7 +178,7 @@ public final class CentralAuthenticationServiceImpl implements CentralAuthentica
         resourceResolverName="GRANT_SERVICE_TICKET_RESOURCE_RESOLVER")
     @Profiled(tag="GRANT_SERVICE_TICKET", logFailuresSeparately = false)
     @Transactional(readOnly = false)
-    public String grantServiceTicket(final String ticketGrantingTicketId, final Service service, final Credentials credentials) throws TicketException {
+    public String grantServiceTicket(final String ticketGrantingTicketId, final Service service, final Credentials credentials, Boolean fakeLogin) throws TicketException {
 
         Assert.notNull(ticketGrantingTicketId, "ticketGrantingticketId cannot be null");
         Assert.notNull(service, "service cannot be null");
@@ -242,7 +242,7 @@ public final class CentralAuthenticationServiceImpl implements CentralAuthentica
         final ServiceTicket serviceTicket = ticketGrantingTicket
             .grantServiceTicket(serviceTicketUniqueTicketIdGenerator
                 .getNewTicketId(ServiceTicket.PREFIX), service,
-                this.serviceTicketExpirationPolicy, credentials != null);
+                this.serviceTicketExpirationPolicy, credentials != null, fakeLogin);
 
         this.serviceTicketRegistry.addTicket(serviceTicket);
 
@@ -273,7 +273,7 @@ public final class CentralAuthenticationServiceImpl implements CentralAuthentica
     @Transactional(readOnly = false)
     public String grantServiceTicket(final String ticketGrantingTicketId,
         final Service service) throws TicketException {
-        return this.grantServiceTicket(ticketGrantingTicketId, service, null);
+        return this.grantServiceTicket(ticketGrantingTicketId, service, null, false);
     }
 
     /**
@@ -405,6 +405,7 @@ public final class CentralAuthenticationServiceImpl implements CentralAuthentica
             }
             
             authToUse.getAttributes().put("ServerName", serviceTicket.getServerName());
+            authToUse.getAttributes().put("FakeLogin", serviceTicket.getFakeLogin());
             authentications.add(authToUse);
 
             return new ImmutableAssertionImpl(authentications, serviceTicket.getService(), serviceTicket.isFromNewLogin());

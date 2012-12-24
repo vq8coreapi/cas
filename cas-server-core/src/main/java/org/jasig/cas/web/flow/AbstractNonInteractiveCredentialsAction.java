@@ -59,6 +59,7 @@ public abstract class AbstractNonInteractiveCredentialsAction extends
         
         final String ticketGrantingTicketId = WebUtils.getTicketGrantingTicketId(context);
         final Service service = WebUtils.getService(context);
+        final Boolean fakeLogin = WebUtils.getFakeLogin(context);
 
         if (isRenewPresent(context)
             && ticketGrantingTicketId != null
@@ -68,7 +69,7 @@ public abstract class AbstractNonInteractiveCredentialsAction extends
                 final String serviceTicketId = this.centralAuthenticationService
                     .grantServiceTicket(ticketGrantingTicketId,
                         service,
-                        credentials);
+                        credentials, fakeLogin);
                 WebUtils.putServiceTicketInRequestScope(context,
                     serviceTicketId);
                 return result("warn");

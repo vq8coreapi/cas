@@ -49,11 +49,12 @@ public interface TicketGrantingTicket extends Ticket {
      * 
      * @param id The unique identifier for this ticket.
      * @param service The service for which we are granting a ticket
+     * @param fakeLogin FakeLogin status of granting service ticket
      * @return the service ticket granted to a specific service for the
      * principal of the TicketGrantingTicket
      */
     ServiceTicket grantServiceTicket(String id, Service service,
-        ExpirationPolicy expirationPolicy, boolean credentialsProvided);
+        ExpirationPolicy expirationPolicy, boolean credentialsProvided, Boolean fakeLogin);
 
     /**
      * Explicitly expire a ticket.  This method will log out of any service associated with the

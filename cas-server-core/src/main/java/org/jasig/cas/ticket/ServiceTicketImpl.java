@@ -62,6 +62,9 @@ public final class ServiceTicketImpl extends AbstractTicket implements
     @Column(name="SERVER_NAME")
     private String serverName;
     
+    @Column(name="FAKE_LOGIN")
+    private Boolean fakeLogin = false;
+    
     public ServiceTicketImpl() {
         // exists for JPA purposes
     }
@@ -81,7 +84,7 @@ public final class ServiceTicketImpl extends AbstractTicket implements
      */
     protected ServiceTicketImpl(final String id,
         final TicketGrantingTicketImpl ticket, final Service service,
-        final boolean fromNewLogin, final ExpirationPolicy policy) {
+        final boolean fromNewLogin, final ExpirationPolicy policy, Boolean fakeLogin) {
         super(id, ticket, policy);
         
         // here we create a new parameter serverUrl and add it to ST
@@ -90,7 +93,9 @@ public final class ServiceTicketImpl extends AbstractTicket implements
         setServerName( requestUrl.substring(0, requestUrl.length() - requestUri.length()) );       
         Assert.notNull(ticket, "ticket cannot be null");
         Assert.notNull(service, "service cannot be null");
+        Assert.notNull(fakeLogin, "fakeLogin cannot be null");
 
+        this.fakeLogin = fakeLogin;
         this.service = service;
         this.fromNewLogin = fromNewLogin;
     }
@@ -144,5 +149,9 @@ public final class ServiceTicketImpl extends AbstractTicket implements
 
 	public void setServerName(String serverName) {
 		this.serverName = serverName;
+	}
+
+	public Boolean getFakeLogin() {
+		return fakeLogin;
 	}
 }
