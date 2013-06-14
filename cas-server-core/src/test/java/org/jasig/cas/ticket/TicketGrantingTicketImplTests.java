@@ -26,6 +26,7 @@ import org.jasig.cas.authentication.Authentication;
 import org.jasig.cas.mock.MockService;
 import org.jasig.cas.ticket.support.NeverExpiresExpirationPolicy;
 import org.jasig.cas.util.DefaultUniqueTicketIdGenerator;
+import org.jasig.cas.util.HttpTestRequestResponseHolder;
 import org.jasig.cas.util.UniqueTicketIdGenerator;
 
 import junit.framework.TestCase;
@@ -38,6 +39,16 @@ import junit.framework.TestCase;
 public class TicketGrantingTicketImplTests extends TestCase {
 
     private UniqueTicketIdGenerator uniqueTicketIdGenerator = new DefaultUniqueTicketIdGenerator();
+
+    @Override
+    protected void setUp() throws Exception {
+        HttpTestRequestResponseHolder.mock();
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        HttpTestRequestResponseHolder.clear();
+    }
 
     public void testEquals() {
         TicketGrantingTicket t = new TicketGrantingTicketImpl("test", null,

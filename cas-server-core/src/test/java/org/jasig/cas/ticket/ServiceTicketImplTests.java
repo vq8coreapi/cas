@@ -24,6 +24,7 @@ import org.jasig.cas.authentication.principal.Service;
 import org.jasig.cas.ticket.support.MultiTimeUseOrTimeoutExpirationPolicy;
 import org.jasig.cas.ticket.support.NeverExpiresExpirationPolicy;
 import org.jasig.cas.util.DefaultUniqueTicketIdGenerator;
+import org.jasig.cas.util.HttpTestRequestResponseHolder;
 import org.jasig.cas.util.UniqueTicketIdGenerator;
 
 import junit.framework.TestCase;
@@ -40,6 +41,16 @@ public class ServiceTicketImplTests extends TestCase {
         new NeverExpiresExpirationPolicy());
 
     private UniqueTicketIdGenerator uniqueTicketIdGenerator = new DefaultUniqueTicketIdGenerator();
+
+    @Override
+    protected void setUp() throws Exception {
+        HttpTestRequestResponseHolder.mock();
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        HttpTestRequestResponseHolder.clear();
+    }
 
     public void testNoService() {
         try {

@@ -30,6 +30,28 @@
   <name>Jasig CAS Core</name>
   <description>CAS core</description>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>build-test-jar</id>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                        <configuration>
+                            <skip>false</skip>
+                            <forceCreation>true</forceCreation>
+                            <useDefaultManifestFile>false</useDefaultManifestFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
 		<dependency>
 			<groupId>log4j</groupId>

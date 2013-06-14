@@ -42,6 +42,7 @@ import org.jasig.cas.ticket.TicketGrantingTicketImpl;
 import org.jasig.cas.ticket.support.HardTimeoutExpirationPolicy;
 import org.jasig.cas.ticket.support.MultiTimeUseOrTimeoutExpirationPolicy;
 import org.jasig.cas.util.DefaultUniqueTicketIdGenerator;
+import org.jasig.cas.util.HttpTestRequestResponseHolder;
 import org.jasig.cas.util.UniqueTicketIdGenerator;
 
 import org.junit.Before;
@@ -110,6 +111,11 @@ public class JpaTicketRegistryTests {
     public void setUp() {
         SimpleJdbcTestUtils.deleteFromTables(simpleJdbcTemplate, "SERVICETICKET");
         SimpleJdbcTestUtils.deleteFromTables(simpleJdbcTemplate, "TICKETGRANTINGTICKET");
+        HttpTestRequestResponseHolder.mock();
+    }
+
+    public void tearDown() {
+        HttpTestRequestResponseHolder.clear();
     }
     
     

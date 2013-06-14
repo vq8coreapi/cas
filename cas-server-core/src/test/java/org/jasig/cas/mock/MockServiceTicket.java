@@ -71,6 +71,11 @@ public class MockServiceTicket implements ServiceTicket {
         return null;
     }
 
+    @Override
+    public String getServerName() {
+        return null;
+    }
+
     public String getId() {
         return id;
     }

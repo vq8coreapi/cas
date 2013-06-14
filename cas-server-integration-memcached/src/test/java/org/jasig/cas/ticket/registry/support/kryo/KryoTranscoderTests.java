@@ -98,6 +98,11 @@ public class KryoTranscoderTests {
             return null;
         }
 
+        @Override
+        public String getServerName() {
+            return null;  //To change body of implemented methods use File | Settings | File Templates.
+        }
+
         public String getId() {
             return id;
         }

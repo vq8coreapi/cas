@@ -32,6 +32,7 @@ import org.jasig.cas.ticket.Ticket;
 import org.jasig.cas.ticket.TicketGrantingTicket;
 import org.jasig.cas.ticket.TicketGrantingTicketImpl;
 import org.jasig.cas.ticket.support.NeverExpiresExpirationPolicy;
+import org.jasig.cas.util.HttpTestRequestResponseHolder;
 import org.jboss.cache.Cache;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -61,10 +62,13 @@ public final class JBossCacheTicketRegistryTests extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         this.ticketRegistry = this.getNewTicketRegistry();
+
+        HttpTestRequestResponseHolder.mock();
     }
 
     protected void tearDown() throws Exception {
         super.tearDown();
+        HttpTestRequestResponseHolder.clear();
     }
 
     protected Authentication getAuthentication() {

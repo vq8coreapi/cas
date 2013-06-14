@@ -20,6 +20,9 @@ package org.jasig.cas;
 
 import org.jasig.cas.authentication.AuthenticationManager;
 import org.jasig.cas.ticket.registry.TicketRegistry;
+import org.jasig.cas.util.HttpTestRequestResponseHolder;
+import org.junit.After;
+import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
@@ -40,6 +43,16 @@ public abstract class AbstractCentralAuthenticationServiceTest extends AbstractJ
 
     @Autowired(required=true)
     private AuthenticationManager authenticationManager;
+
+    @Before
+    public void setUp() {
+        HttpTestRequestResponseHolder.mock();
+    }
+
+    @After
+    public void tearDown() {
+        HttpTestRequestResponseHolder.clear();
+    }
 
     public AuthenticationManager getAuthenticationManager() {
         return this.authenticationManager;

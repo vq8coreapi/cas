@@ -28,7 +28,9 @@ import org.jasig.cas.ticket.registry.JpaTicketRegistry;
 import org.jasig.cas.ticket.registry.TicketRegistry;
 import org.jasig.cas.ticket.support.HardTimeoutExpirationPolicy;
 import org.jasig.cas.util.DefaultUniqueTicketIdGenerator;
+import org.jasig.cas.util.HttpTestRequestResponseHolder;
 import org.jasig.cas.util.UniqueTicketIdGenerator;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,6 +68,13 @@ public class SessionMonitorTests {
         this.defaultRegistry = new DefaultTicketRegistry();
         this.monitor = new SessionMonitor();
         this.monitor.setTicketRegistry(this.defaultRegistry);
+
+        HttpTestRequestResponseHolder.mock();
+    }
+
+    @After
+    public void tearDown() {
+        HttpTestRequestResponseHolder.clear();
     }
 
     @Test

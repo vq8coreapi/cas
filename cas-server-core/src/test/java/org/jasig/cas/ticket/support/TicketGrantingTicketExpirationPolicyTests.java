@@ -22,6 +22,7 @@ import junit.framework.TestCase;
 import org.jasig.cas.TestUtils;
 import org.jasig.cas.ticket.TicketGrantingTicket;
 import org.jasig.cas.ticket.TicketGrantingTicketImpl;
+import org.jasig.cas.util.HttpTestRequestResponseHolder;
 
 /**
  * @author William G. Thompson, Jr.
@@ -47,6 +48,13 @@ public class TicketGrantingTicketExpirationPolicyTests extends TestCase {
         this.expirationPolicy.setMaxTimeToLiveInSeconds(HARD_TIMEOUT_SECONDS);
         this.expirationPolicy.setTimeToKillInSeconds(SLIDING_TIMEOUT_SECONDS);
         this.ticketGrantingTicket = new TicketGrantingTicketImpl("test", TestUtils.getAuthentication(), this.expirationPolicy);
+
+        HttpTestRequestResponseHolder.mock();
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        HttpTestRequestResponseHolder.clear();
     }
 
     public void testTgtIsExpiredByHardTimeOut() throws InterruptedException {

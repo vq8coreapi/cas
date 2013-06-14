@@ -24,6 +24,7 @@ import org.jasig.cas.authentication.principal.RememberMeCredentials;
 import org.jasig.cas.ticket.TicketGrantingTicketImpl;
 
 import junit.framework.TestCase;
+import org.jasig.cas.util.HttpTestRequestResponseHolder;
 
 /**
  * Tests for RememberMeDelegatingExpirationPolicy
@@ -41,6 +42,13 @@ public final class RememberMeDelegatingExpirationPolicyTests extends TestCase {
         this.p = new RememberMeDelegatingExpirationPolicy();
         this.p.setRememberMeExpirationPolicy(new MultiTimeUseOrTimeoutExpirationPolicy(1, 20000));
         this.p.setSessionExpirationPolicy(new MultiTimeUseOrTimeoutExpirationPolicy(5, 20000));
+
+        HttpTestRequestResponseHolder.mock();
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        HttpTestRequestResponseHolder.clear();
     }
 
     public void testTicketExpirationWithRememberMe() {

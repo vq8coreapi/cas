@@ -49,6 +49,13 @@
 			<artifactId>cas-server-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-core</artifactId>
+            <version>${project.version}</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
 
 		<dependency>
 			<groupId>org.jboss.cache</groupId>

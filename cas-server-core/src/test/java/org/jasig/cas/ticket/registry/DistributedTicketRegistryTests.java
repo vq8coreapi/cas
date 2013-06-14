@@ -30,6 +30,7 @@ import org.jasig.cas.ticket.TicketGrantingTicketImpl;
 import org.jasig.cas.ticket.support.NeverExpiresExpirationPolicy;
 
 import junit.framework.TestCase;
+import org.jasig.cas.util.HttpTestRequestResponseHolder;
 
 /**
  * 
@@ -47,6 +48,13 @@ public class DistributedTicketRegistryTests extends TestCase {
     protected void setUp() throws Exception {
         this.ticketRegistry = new TestDistributedTicketRegistry();
         this.wasTicketUpdated = false;
+
+        HttpTestRequestResponseHolder.mock();
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        HttpTestRequestResponseHolder.clear();
     }
 
     public void testProxiedInstancesEqual() {

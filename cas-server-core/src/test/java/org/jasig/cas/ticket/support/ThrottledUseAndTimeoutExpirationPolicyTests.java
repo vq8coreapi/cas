@@ -23,6 +23,7 @@ import org.jasig.cas.ticket.TicketGrantingTicket;
 import org.jasig.cas.ticket.TicketGrantingTicketImpl;
 
 import junit.framework.TestCase;
+import org.jasig.cas.util.HttpTestRequestResponseHolder;
 
 /**
  * @author Scott Battaglia
@@ -46,6 +47,13 @@ public class ThrottledUseAndTimeoutExpirationPolicyTests extends TestCase {
             .getAuthentication(), this.expirationPolicy);
 
         super.setUp();
+
+        HttpTestRequestResponseHolder.mock();
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        HttpTestRequestResponseHolder.clear();
     }
 
     public void testTicketIsNotExpired() {

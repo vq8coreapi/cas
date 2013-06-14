@@ -4,23 +4,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class CasHttpMessage {
-	private HttpServletRequest request;
-	private HttpServletResponse response;
+    private HttpServletRequest request;
+    private HttpServletResponse response;
 
-	public HttpServletRequest getRequest() {
-		return request;
-	}
+    public CasHttpMessage() {
+    }
 
-	public void setRequest(HttpServletRequest request) {
-		this.request = request;
-	}
+    public CasHttpMessage(HttpServletRequest request, HttpServletResponse response) {
+        this.request = request;
+        this.response = response;
+    }
 
-	public HttpServletResponse getResponse() {
-		return response;
-	}
+    public HttpServletRequest getRequest() {
+        return request;
+    }
 
-	public void setResponse(HttpServletResponse response) {
-		this.response = response;
-	}
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
 
 }

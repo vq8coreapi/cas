@@ -28,6 +28,7 @@ import org.jasig.cas.ticket.TicketGrantingTicket;
 import org.jasig.cas.ticket.TicketGrantingTicketImpl;
 import org.jasig.cas.ticket.support.NeverExpiresExpirationPolicy;
 import junit.framework.TestCase;
+import org.jasig.cas.util.HttpTestRequestResponseHolder;
 
 /**
  * @author Scott Battaglia
@@ -43,9 +44,12 @@ public abstract class AbstractTicketRegistryTests extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         this.ticketRegistry = this.getNewTicketRegistry();
+
+        HttpTestRequestResponseHolder.mock();
     }
 
     protected void tearDown() throws Exception {
+        HttpTestRequestResponseHolder.clear();
         super.tearDown();
     }
 
