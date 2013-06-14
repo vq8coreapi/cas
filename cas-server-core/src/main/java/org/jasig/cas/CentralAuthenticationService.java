@@ -67,6 +67,23 @@ public interface CentralAuthenticationService {
      */
     String grantServiceTicket(String ticketGrantingTicketId, Service service)
         throws TicketException;
+
+    /**
+     * Grant a ServiceTicket for a Service *if* the principal resolved from the
+     * credentials matches the principal associated with the
+     * TicketGrantingTicket.
+     *
+     * @param ticketGrantingTicketId Proof of prior authentication.
+     * @param service The target service of the ServiceTicket.
+     * @param credentials the Credentials to present to receive the
+     * ServiceTicket
+     * @return the ServiceTicket for target Service.
+     * @throws TicketException if the ticket could not be created.
+     */
+    String grantServiceTicket(final String ticketGrantingTicketId,
+                              final Service service, final Credentials credentials)
+            throws TicketException;
+
     /**
      * Grant a ServiceTicket for a Service *if* the principal resolved from the
      * credentials matches the principal associated with the

@@ -173,6 +173,20 @@ public final class CentralAuthenticationServiceImpl implements CentralAuthentica
      * or Service are null.
      */
     @Audit(
+            action="SERVICE_TICKET",
+            actionResolverName="GRANT_SERVICE_TICKET_RESOLVER",
+            resourceResolverName="GRANT_SERVICE_TICKET_RESOURCE_RESOLVER")
+    @Profiled(tag="GRANT_SERVICE_TICKET", logFailuresSeparately = false)
+    @Transactional(readOnly = false)
+    public String grantServiceTicket(final String ticketGrantingTicketId, final Service service, final Credentials credentials) throws TicketException {
+        return grantServiceTicket(ticketGrantingTicketId, service, credentials, false);
+    }
+
+    /**
+     * @throws IllegalArgumentException if TicketGrantingTicket ID, Credentials
+     * or Service are null.
+     */
+    @Audit(
         action="SERVICE_TICKET",
         actionResolverName="GRANT_SERVICE_TICKET_RESOLVER",
         resourceResolverName="GRANT_SERVICE_TICKET_RESOURCE_RESOLVER")

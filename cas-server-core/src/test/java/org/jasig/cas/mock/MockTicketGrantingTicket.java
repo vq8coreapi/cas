@@ -72,6 +72,15 @@ public class MockTicketGrantingTicket implements TicketGrantingTicket {
             final Service service,
             final ExpirationPolicy expirationPolicy,
             final boolean credentialsProvided) {
+        return grantServiceTicket(id, service, expirationPolicy, credentialsProvided, false);
+    }
+
+    public ServiceTicket grantServiceTicket(
+            final String id,
+            final Service service,
+            final ExpirationPolicy expirationPolicy,
+            final boolean credentialsProvided,
+            final Boolean fakeLogin) {
         usageCount++;
         return new MockServiceTicket(id, service, this);
     }

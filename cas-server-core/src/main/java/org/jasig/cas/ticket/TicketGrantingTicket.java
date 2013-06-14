@@ -46,6 +46,17 @@ public interface TicketGrantingTicket extends Ticket {
 
     /**
      * Grant a ServiceTicket for a specific service.
+     *
+     * @param id The unique identifier for this ticket.
+     * @param service The service for which we are granting a ticket
+     * @return the service ticket granted to a specific service for the
+     * principal of the TicketGrantingTicket
+     */
+    ServiceTicket grantServiceTicket(String id, Service service,
+                                     ExpirationPolicy expirationPolicy, boolean credentialsProvided);
+
+    /**
+     * Grant a ServiceTicket for a specific service.
      * 
      * @param id The unique identifier for this ticket.
      * @param service The service for which we are granting a ticket

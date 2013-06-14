@@ -76,6 +76,11 @@ public class MockServiceTicket implements ServiceTicket {
         return null;
     }
 
+    @Override
+    public Boolean getFakeLogin() {
+        return null;
+    }
+
     public String getId() {
         return id;
     }

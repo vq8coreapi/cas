@@ -110,6 +110,12 @@ public final class TicketGrantingTicketImpl extends AbstractTicket implements
     }
 
     public synchronized ServiceTicket grantServiceTicket(final String id,
+                                                         final Service service, final ExpirationPolicy expirationPolicy,
+                                                         final boolean credentialsProvided) {
+        return grantServiceTicket(id, service, expirationPolicy, credentialsProvided, false);
+    }
+
+    public synchronized ServiceTicket grantServiceTicket(final String id,
         final Service service, final ExpirationPolicy expirationPolicy,
         final boolean credentialsProvided, final Boolean fakeLogin) {
         final ServiceTicket serviceTicket = new ServiceTicketImpl(id, this,
