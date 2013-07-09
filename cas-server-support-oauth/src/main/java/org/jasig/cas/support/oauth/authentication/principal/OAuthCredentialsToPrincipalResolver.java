@@ -28,7 +28,7 @@ import org.jasig.cas.authentication.principal.CredentialsToPrincipalResolver;
  * @author Jerome Leleu
  * @since 3.5.0
  */
-public final class OAuthCredentialsToPrincipalResolver extends AbstractPersonDirectoryCredentialsToPrincipalResolver
+public class OAuthCredentialsToPrincipalResolver extends AbstractPersonDirectoryCredentialsToPrincipalResolver
     implements CredentialsToPrincipalResolver {
     
     @Override

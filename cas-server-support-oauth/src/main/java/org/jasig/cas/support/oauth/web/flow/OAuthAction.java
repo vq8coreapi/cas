@@ -53,7 +53,7 @@ import org.springframework.webflow.execution.RequestContext;
  * @author Jerome Leleu
  * @since 3.5.0
  */
-public final class OAuthAction extends AbstractAction {
+public class OAuthAction extends AbstractAction {
     
     private final Logger log = LoggerFactory.getLogger(OAuthAction.class);
     

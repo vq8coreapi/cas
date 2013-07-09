@@ -107,8 +107,8 @@ public final class ServiceTicketImpl extends AbstractTicket implements
         super(id, ticket, policy);
         
         // here we create a new parameter serverUrl and add it to ST
-        String requestUri = HttpUtils.getCasHttpMessage().getRequest().getRequestURI();
-        String requestUrl = HttpUtils.getCasHttpMessage().getRequest().getRequestURL().toString();        	
+        String requestUri = HttpUtils.getRequest().getRequestURI();
+        String requestUrl = HttpUtils.getRequest().getRequestURL().toString();
         setServerName( requestUrl.substring(0, requestUrl.length() - requestUri.length()) );       
         Assert.notNull(ticket, "ticket cannot be null");
         Assert.notNull(service, "service cannot be null");

@@ -36,7 +36,7 @@ import org.scribe.up.provider.OAuthProvider;
  * @author Jerome Leleu
  * @since 3.5.0
  */
-public final class OAuthAuthenticationHandler extends AbstractPreAndPostProcessingAuthenticationHandler {
+public class OAuthAuthenticationHandler extends AbstractPreAndPostProcessingAuthenticationHandler {
     
     @NotNull
     private OAuthConfiguration configuration;
