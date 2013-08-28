@@ -2,7 +2,8 @@ package org.jasig.cas.util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Properties;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class HttpUtils {
 
@@ -23,26 +24,26 @@ public class HttpUtils {
         return casHttpMessage.get().getRequest();
     }
 
-    public static Properties getProperties() {
+    public static Map<String, Object> getContext() {
         if (casHttpMessage.get() == null) {
             throw new IllegalStateException("CasHttpMessage is not set for this thread");
         }
-        return casHttpMessage.get().getProperties();
+        return casHttpMessage.get().getContext();
     }
 
     public static class CasHttpMessage {
         private final HttpServletRequest request;
         private final HttpServletResponse response;
-        private final Properties properties;
+        private final Map<String, Object> context;
 
         public CasHttpMessage(HttpServletRequest request, HttpServletResponse response) {
-            this(request, response, new Properties());
+            this(request, response, new LinkedHashMap<String, Object>());
         }
 
-        public CasHttpMessage(HttpServletRequest request, HttpServletResponse response, Properties properties) {
+        public CasHttpMessage(HttpServletRequest request, HttpServletResponse response, Map<String, Object> context) {
             this.request = request;
             this.response = response;
-            this.properties = properties;
+            this.context = context;
         }
 
         public HttpServletRequest getRequest() {
@@ -53,8 +54,8 @@ public class HttpUtils {
             return response;
         }
 
-        public Properties getProperties() {
-            return properties;
+        public Map<String, Object> getContext() {
+            return context;
         }
     }
 }
